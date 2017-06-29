@@ -101,7 +101,7 @@ public:
   inline valuetype ScalarProduct(const Vector3D& other) const { return operator*(other); }
   inline Vector3D CrossProduct(const Vector3D& other) const { return Vector3D(y_ * other.z_ - z_ * other.y_, z_ * other.x_ - x_ * other.z_, x_ * other.y_ - y_ * other.x_); }
   inline bool IsOrthogonal(const Vector3D& other) const { return AreEqual(ScalarProduct(other), valuetype(0)); }
-  inline bool IsCollinear(const Vector2D& other) const { return AreEqual(valuetype(pow(ScalarProduct(other), 2)), (LengthSquared() * other.LengthSquared())); }
+  inline bool IsCollinear(const Vector3D& other) const { return AreEqual(valuetype(pow(ScalarProduct(other), 2)), (LengthSquared() * other.LengthSquared())); }
   inline valuetype LengthSquared() const { return ScalarProduct(*this); }
   inline valuetype Length() const { return valuetype(std::sqrtf(LengthSquared())); }
   inline Vector3D Normalize() const { return operator/(Length()); }
