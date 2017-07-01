@@ -51,9 +51,9 @@ public:
   valuetype Length() const { return valuetype(std::sqrtf(LengthSquared())); }
   Vector2D Normalize() const { return operator/(Length()); }
   bool IsNormalized() const { return AreEqual(Length(), valuetype(1)); }
-  Vector2D Project(const Vector2D& other) const { return other * (operator*(other) / other.LengthSquared()); }
+  Vector2D ProjectOnto(const Vector2D& other) const { return other * (operator*(other) / other.LengthSquared()); }
 
-  // inline Vector2D Reflect(const Vector2D& normal) const { return (*this) - (Project(normal) * valuetype(2.0)); }
+  // inline Vector2D Reflect(const Vector2D& normal) const { return (*this) - (ProjectOnto(normal) * valuetype(2.0)); }
   // inline Vector2D Rotate(float angle_radians) const { return Vector2D(valuetype(float(x_) * std::cosf(angle_radians) - float(y_) * std::sinf(angle_radians)), valuetype(float(x_) * std::sinf(angle_radians) + float(y_) * std::cosf(angle_radians))); }
 
   valuetype x_, y_;
@@ -108,7 +108,7 @@ public:
   bool IsNormalized() const { return AreEqual(Length(), valuetype(1)); }
   Vector3D Project(const Vector3D& other) const { return other * (operator*(other) / other.LengthSquared()); }
 
-  // inline Vector3D Reflect(const Vector3D& normal) const { return (*this) - (Project(normal) * valuetype(2.0)); }
+  // inline Vector3D Reflect(const Vector3D& normal) const { return (*this) - (ProjectOnto(normal) * valuetype(2.0)); }
   // inline Vector3D Rotate(float angle_radians) const { return Vector3D(valuetype(float(x_) * std::cosf(angle_radians) - float(y_) * std::sinf(angle_radians)), valuetype(float(x_) * std::sinf(angle_radians) + float(y_) * std::cosf(angle_radians))); }
 
   valuetype x_, y_, z_;

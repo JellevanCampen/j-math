@@ -3,13 +3,13 @@
 #define J_MATH_POINT_H_
 
 #include <iostream>
-#include "numeric_comparison.h" 
+#include "numeric_comparison.h"
 #include "vector.h"
 
 namespace j {
 namespace math {
 
-// A point in two-dimensional space. Represents a position. 
+// A point in two-dimensional space. Represents a position.
 template<typename valuetype>
 struct Point2D {
 public:
@@ -20,14 +20,14 @@ public:
   ~Point2D() = default;
 
   // Operators
-  inline Point2D operator=(const Point2D&) = default;
-  inline bool operator== (const Point2D& other) const { return (AreEqual(x_, other.x_) && AreEqual(y_, other.y_)); }
-  inline bool operator!= (const Point2D& other) const { return (!AreEqual(x_, other.x_) || !AreEqual(y_, other.y_)); }
-  inline Point2D operator+ (const Vector2D<valuetype>& vector) const { return Point2D(x_ + vector.x_, y_ + vector.y_); }
-  inline Point2D operator- (const Vector2D<valuetype>& vector) const { return Point2D(x_ - vector.x_, y_ - vector.y_); }
-  inline Vector2D<valuetype> operator- (const Point2D<valuetype>& other) const { return Vector2D<valuetype>(other.x_ - x_, other.y_ - y_); }
-  inline void operator+= (const Vector2D<valuetype>& vector) { x_ += vector.x_; y_ += vector.y_; }
-  inline void operator-= (const Vector2D<valuetype>& vector) { x_ -= vector.x_; y_ -= vector.y_; }
+  Point2D& operator=(const Point2D&) = default;
+  bool operator== (const Point2D& other) const { return (AreEqual(x_, other.x_) && AreEqual(y_, other.y_)); }
+  bool operator!= (const Point2D& other) const { return (!AreEqual(x_, other.x_) || !AreEqual(y_, other.y_)); }
+  Point2D operator+ (const Vector2D<valuetype>& vector) const { return Point2D(x_ + vector.x_, y_ + vector.y_); }
+  Point2D operator- (const Vector2D<valuetype>& vector) const { return Point2D(x_ - vector.x_, y_ - vector.y_); }
+  Vector2D<valuetype> operator- (const Point2D<valuetype>& other) const { return Vector2D<valuetype>(other.x_ - x_, other.y_ - y_); }
+  void operator+= (const Vector2D<valuetype>& vector) { x_ += vector.x_; y_ += vector.y_; }
+  void operator-= (const Vector2D<valuetype>& vector) { x_ -= vector.x_; y_ -= vector.y_; }
 
   // Cast to different valuetype
   template<typename other_valuetype> operator Point2D<other_valuetype>() const { return Point2D<other_valuetype>(other_valuetype(x_), other_valuetype(y_)); }
@@ -44,7 +44,7 @@ typedef Point2D<int> Point2Di, p2Di;
 typedef Point2D<float> Point2Df, p2Df;
 typedef Point2D<double> Point2Dd, p2Dd;
 
-// A point in three-dimensional space. Represents a position. 
+// A point in three-dimensional space. Represents a position.
 template<typename valuetype>
 struct Point3D {
 public:
@@ -55,14 +55,14 @@ public:
   ~Point3D() = default;
 
   // Operators
-  inline Point3D operator=(const Point3D&) = default;
-  inline bool operator== (const Point3D& other) const { return (AreEqual(x_, other.x_) && AreEqual(y_, other.y_) && AreEqual(z_, other.z_)); }
-  inline bool operator!= (const Point3D& other) const { return (!AreEqual(x_, other.x_) || !AreEqual(y_, other.y_) || !AreEqual(z_, other.z_)); }
-  inline Point3D operator+ (const Vector3D<valuetype>& vector) const { return Point3D(x_ + vector.x_, y_ + vector.y_, z_ + vector.z_); }
-  inline Point3D operator- (const Vector3D<valuetype>& vector) const { return Point3D(x_ - vector.x_, y_ - vector.y_, z_ - vector.z_); }
-  inline Vector3D<valuetype> operator- (const Point3D<valuetype>& other) const { return Vector3D<valuetype>(other.x_ - x_, other.y_ - y_, other.z_ - z_); }
-  inline void operator+= (const Vector3D<valuetype>& vector) { x_ += vector.x_; y_ += vector.y_; z_ += vector.z_; }
-  inline void operator-= (const Vector3D<valuetype>& vector) { x_ -= vector.x_; y_ -= vector.y_; z_ -= vector.z_; }
+  Point3D& operator=(const Point3D&) = default;
+  bool operator== (const Point3D& other) const { return (AreEqual(x_, other.x_) && AreEqual(y_, other.y_) && AreEqual(z_, other.z_)); }
+  bool operator!= (const Point3D& other) const { return (!AreEqual(x_, other.x_) || !AreEqual(y_, other.y_) || !AreEqual(z_, other.z_)); }
+  Point3D operator+ (const Vector3D<valuetype>& vector) const { return Point3D(x_ + vector.x_, y_ + vector.y_, z_ + vector.z_); }
+  Point3D operator- (const Vector3D<valuetype>& vector) const { return Point3D(x_ - vector.x_, y_ - vector.y_, z_ - vector.z_); }
+  Vector3D<valuetype> operator- (const Point3D<valuetype>& other) const { return Vector3D<valuetype>(other.x_ - x_, other.y_ - y_, other.z_ - z_); }
+  void operator+= (const Vector3D<valuetype>& vector) { x_ += vector.x_; y_ += vector.y_; z_ += vector.z_; }
+  void operator-= (const Vector3D<valuetype>& vector) { x_ -= vector.x_; y_ -= vector.y_; z_ -= vector.z_; }
 
   // Cast to different valuetype
   template<typename other_valuetype> operator Point3D<other_valuetype>() const { return Point3D<other_valuetype>(other_valuetype(x_), other_valuetype(y_), other_valuetype(z_)); }
@@ -77,7 +77,7 @@ public:
 };
 typedef Point3D<int> p3i;
 typedef Point3D<float> p3f;
-typedef Point3D<double> p3d; 
+typedef Point3D<double> p3d;
 
 } // namespace
 } // namespace

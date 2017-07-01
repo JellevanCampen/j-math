@@ -1,6 +1,6 @@
 #include <sstream>
-#include "gtest/gtest.h"
-#include "../src/vector.h"
+#include <gtest\gtest.h>
+#include "..\src\vector.h"
 
 using namespace j::math;
 
@@ -88,7 +88,7 @@ TEST(Vector2DTests, CompoundAssignmentOperators) {
 
 TEST(Vector2DTests, StringConversion) {
   vec2i vec(2, 3);
-  std::stringstream ss; 
+  std::stringstream ss;
   ss << vec;
   std::string s = ss.str();
   EXPECT_EQ(s.compare("v(2, 3)"), 0) << "String conversion returned incorrect string (expected \"v(7, 6)\"). String: \"" << vec << "\"";
@@ -155,10 +155,10 @@ TEST(Vector2DTests, Projection) {
   vec2f vec(2.f, 3.f);
   vec2f vec_x(1.f, 0.f);
   vec2f vec_neg_y(0.f, -1.f);
-  EXPECT_EQ(vec.Project(vec_x), vec2f(2.f, 0.f)) << "Vector projection onto x-axis is incorrect (expected (2.f, 0.f)). Value: " << vec.Project(vec_x);
-  EXPECT_EQ(vec.Project(vec_neg_y), vec2f(0.f, 3.f)) << "Vector projection onto negative y-axis is incorrect (expected (0.f, 3.f)). Possible error with negative components in projection vectors. Value: " << vec.Project(vec_neg_y);
-  EXPECT_EQ(vec.Project(vec_x * 2), vec2f(2.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect (expected (2.f, 0.f)). Possible error with non-unit projection vectors. Value: " << vec.Project(vec_x * 2);
-  EXPECT_EQ(vec.Project(vec), vec2f(2.f, 3.f)) << "Vector projection onto self should result in identity operation (expected (2.f, 3.f)). Value: " << vec.Project(vec);
+  EXPECT_EQ(vec.ProjectOnto(vec_x), vec2f(2.f, 0.f)) << "Vector projection onto x-axis is incorrect (expected (2.f, 0.f)). Value: " << vec.ProjectOnto(vec_x);
+  EXPECT_EQ(vec.ProjectOnto(vec_neg_y), vec2f(0.f, 3.f)) << "Vector projection onto negative y-axis is incorrect (expected (0.f, 3.f)). Possible error with negative components in projection vectors. Value: " << vec.ProjectOnto(vec_neg_y);
+  EXPECT_EQ(vec.ProjectOnto(vec_x * 2), vec2f(2.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect (expected (2.f, 0.f)). Possible error with non-unit projection vectors. Value: " << vec.ProjectOnto(vec_x * 2);
+  EXPECT_EQ(vec.ProjectOnto(vec), vec2f(2.f, 3.f)) << "Vector projection onto self should result in identity operation (expected (2.f, 3.f)). Value: " << vec.ProjectOnto(vec);
 }
 
 

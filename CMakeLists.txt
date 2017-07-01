@@ -24,6 +24,8 @@ set(PROJECT_TEST_NAME "${PROJECT_NAME}-test")
 			 
 set(SRC_LIB src/numeric_comparison.h
 			src/shape_types.h
+			src/sphere.h
+			src/line.h
 			src/vector.h
 			src/point.h
 			src/coordinate_frame.h
@@ -59,7 +61,12 @@ if (build_tests)
 
 	# Unit test project
 	set(SRC_TEST    test/main.cc
+					test/numeric_comparison_test.cc
+					test/coordinate_frame_test.cc
 					test/vector_test.cc
+					test/point_test.cc
+					test/line_test.cc
+					test/sphere_test.cc
 	)
 	add_executable( ${PROJECT_TEST_NAME} ${SRC_TEST} )
 	target_link_libraries( ${PROJECT_TEST_NAME} gtest gtest_main)

@@ -5,9 +5,7 @@
 namespace j {
 namespace math {
 
-  constexpr long double PI_L = 3.141592653589793238L;
-  constexpr double PI = 3.141592653589793;
-  constexpr float PI_F = 3.1415927f;
+  constexpr long double PI = 3.14159265358979323846264338327950288419716939937510L;
 
 } // namespace
 } // namespace

@@ -95,61 +95,6 @@ typedef Rectangle2D<int> Rectangle2Di, r2Di;
 typedef Rectangle2D<float> Rectangle2Df, r2Df;
 typedef Rectangle2D<double> Rectangle2Dd, r2Dd;
 
-// Represents a circle in 2D space. 
-template<typename valuetype>
-struct Circle2D {
-public:
-  // Constructors
-  Circle2D() { }
-  Circle2D(Point2D<valuetype> center, valuetype radius) : p_(center), r_(radius) { }
-  Circle2D(valuetype x1, valuetype y1, valuetype radius) : p_(Point2D<valuetype>(x1, y1)), r_(radius) { }
-  Circle2D(Rectangle2D<valuetype> rectangle, bool circle_is_enclosing = true) {
-    Rectangle2D<valuetype> r{ rectangle.ReorderPoints() };
-    Vector2D<valuetype> s{ rectangle.Size() };
-    p_ = r.p1_ + s / valuetype(2);
-    if (circle_is_enclosing == true) // Circle encloses the rectangle
-      r_ = std::sqrtf(s.x_ * s.x_ + s.y_ * s.y_);
-    else // Rectangle encloses the circle
-      r_ = s.x_ <= s.y_ ? s.x_ : s.y_;
-  }
-
-  // Operators
-  inline bool operator== (const Circle2D<valuetype>& other) const { return (p_ == other.p_ && FloatComparison::AreEqual(r_, other.r_)); }
-  inline bool operator!= (const Circle2D<valuetype>& other) const { return (FloatComparison::AreEqual(r_, other.r_) || p_ != other.p_); }
-  inline Circle2D operator+ (const Vector2D<valuetype>& vector) const { return Circle2D(p_ + vector, r_); }
-  inline Circle2D operator- (const Vector2D<valuetype>& vector) const { return Circle2D(p_ - vector, r_); }
-  inline Circle2D operator* (valuetype scalar) const { return Circle2D(p_, r_ * scalar); }
-  inline Circle2D operator/ (valuetype scalar) const { return Circle2D(p_, r_ / scalar); }
-  inline void operator+= (const Vector2D<valuetype>& vector) { Move(vector); }
-  inline void operator-= (const Vector2D<valuetype>& vector) { Move(-vector); }
-  inline void operator*= (valuetype scalar) { r_ *= scalar; }
-  inline void operator/= (valuetype scalar) { r_ /= scalar; }
-  inline Line2D<valuetype> operator[] (float angle) const { return LineOn(angle); }
-  friend std::ostream& operator<<(std::ostream &os, const Circle2D<valuetype>& circle) { return os << "c(" << circle.p_ << ", r=" << circle.r_ << ")"; }
-
-  inline void Move(const Vector2D<valuetype>& vector) { p_ += vector; }
-  inline void Resize(valuetype scalar) { r_ *= scalar; }
-  inline valuetype Area() const { return valuetype(double(r_) * double(r_) * PI) ; }
-  inline Line2D<valuetype> LineOn(float angle) const { return Line2D<valuetype>(p_.x_, p_.y_, valuetype(float(p_.x_) + std::cosf(angle_radians)), valuetype(float(p_.y_) + std::sinf(angle_radians))); }
-  inline Point2D<valuetype> PointOn(float angle, float radius) const { return LineOn(angle)[radius]; }
-  inline bool Contains(Point2D<valuetype> point) const { return p_.Distance(point) <= r_; }
-  inline bool Contains(Line2D<valuetype> line) const { return Contains(line.p1_) && Contains(line.p2_); }
-  inline bool Contains(Rectangle2D<valuetype> rectangle) const { 
-    // Test whether the circle contains the most distant corner of the rectangle
-    valuetype dx1 = (p_.x_ - rectangle.p1_.x_) * (p_.x_ - rectangle.p1_.x_);
-    valuetype dx2 = (p_.x_ - rectangle.p2_.x_) * (p_.x_ - rectangle.p2_.x_);
-    valuetype dy1 = (p_.y_ - rectangle.p1_.y_) * (p_.y_ - rectangle.p1_.y_);
-    valuetype dy2 = (p_.y_ - rectangle.p2_.y_) * (p_.y_ - rectangle.p2_.y_);
-    return (r_ * r_) >= (dx1 >= dx2) ? (dx1) : (dx2)+(dy1 >= dy2) ? (dy1) : (dy2);
-  }
-
-  Point2D<valuetype> p_;
-  valuetype r_;
-};
-typedef Circle2D<int> Circle2Di, c2Di;
-typedef Circle2D<float> Circle2Df, c2Df;
-typedef Circle2D<double> Circle2Dd, c2Dd;
-
 } // namespace
 
 #endif // ENGINE_COMMON_DATATYPES_SHAPETYPES_H_
