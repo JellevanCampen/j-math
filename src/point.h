@@ -2,7 +2,6 @@
 #ifndef J_MATH_POINT_H_
 #define J_MATH_POINT_H_
 
-#include <cmath>
 #include <iostream>
 #include "numeric_comparison.h" 
 #include "vector.h"

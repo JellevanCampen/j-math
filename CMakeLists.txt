@@ -31,10 +31,9 @@ set(SRC_LIB src/numeric_comparison.h
 )
 
 add_library( ${PROJECT_LIB_NAME} ${SRC_LIB})
-target_link_libraries( ${PROJECT_LIB_NAME} ${LIBS} )
 set_target_properties(${PROJECT_LIB_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 add_executable( ${PROJECT_MAIN_NAME} src/main.cc )
-target_link_libraries( ${PROJECT_MAIN_NAME} ${PROJECT_LIB_NAME} )
+# target_link_libraries( ${PROJECT_MAIN_NAME} ${PROJECT_LIB_NAME} )
 
 ################################################################
 # Unit tests
@@ -63,5 +62,6 @@ if (build_tests)
 					test/vector_test.cc
 	)
 	add_executable( ${PROJECT_TEST_NAME} ${SRC_TEST} )
-	target_link_libraries( ${PROJECT_TEST_NAME} gtest gtest_main ${PROJECT_LIB_NAME} )
+	target_link_libraries( ${PROJECT_TEST_NAME} gtest gtest_main)
+	# target_link_libraries( ${PROJECT_TEST_NAME} ${PROJECT_LIB_NAME} )
 endif (build_tests)

@@ -3,9 +3,6 @@
 #define ENGINE_COMMON_DATATYPES_SHAPETYPES_H_
 
 #include <string>
-#include <cmath>
-#include "numeric_comparison.h"
-#include "pi.h"
 
 namespace engine {
 
@@ -135,7 +132,7 @@ public:
   inline valuetype Area() const { return valuetype(double(r_) * double(r_) * PI) ; }
   inline Line2D<valuetype> LineOn(float angle) const { return Line2D<valuetype>(p_.x_, p_.y_, valuetype(float(p_.x_) + std::cosf(angle_radians)), valuetype(float(p_.y_) + std::sinf(angle_radians))); }
   inline Point2D<valuetype> PointOn(float angle, float radius) const { return LineOn(angle)[radius]; }
-  inline bool Contains(Point2D<valuetype> point) const { p_.Distance(point) <= r_; }
+  inline bool Contains(Point2D<valuetype> point) const { return p_.Distance(point) <= r_; }
   inline bool Contains(Line2D<valuetype> line) const { return Contains(line.p1_) && Contains(line.p2_); }
   inline bool Contains(Rectangle2D<valuetype> rectangle) const { 
     // Test whether the circle contains the most distant corner of the rectangle

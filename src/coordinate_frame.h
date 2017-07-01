@@ -39,7 +39,7 @@ public:
   }
 
   // Operators
-  CoordinateFrame3D::operator=(const CoordinateFrame3D&) = default;
+  CoordinateFrame3D& operator=(const CoordinateFrame3D& other) = default;
   inline bool operator== (const CoordinateFrame3D& other) const { return (p_ == other.p_ && u_ == other.u_ && v_ == other.v_ && w_ == other.w_); }
   inline bool operator!= (const CoordinateFrame3D& other) const { return (p_ != other.p_ || u_ != other.u_ || v_ != other.v_ || w_ != other.w_); }
 
@@ -53,8 +53,8 @@ public:
   inline bool IsOrthonormal() const { return (u_.IsNormalized() && v_.IsNormalized() && w_.IsNormalized() && u_.IsOrthogonal(v_) && v_.IsOrthogonal(w_) && w_.IsOrthogonal(u_)); }
   inline bool IsRightHandedOrthonormal() const { return (IsOrthonormal() && u_.CrossProduct(v_) == w_); }
   inline void Reorthonormalize() { CoordinateFrame3D cf = FromTwoVectors(p_, w_, v_); operator=(cf); }
-  inline Vector3D CoordinateFrameToCanonicalCoordinates(const Vector3D& vector) const { return (vector.x_ * u_) + (vector.y_ * v_) + (vector.z_ * w_); }
-  inline Vector3D CanonicalCoordinatesToCoordinateFrame(const Vector3D& vector) const { return Vector3D(u_ * vector, v_ * vector, w_ * vector); }
+  inline Vector3D<valuetype> CoordinateFrameToCanonicalCoordinates(const Vector3D<valuetype>& vector) const { return (vector.x_ * u_) + (vector.y_ * v_) + (vector.z_ * w_); }
+  inline Vector3D<valuetype> CanonicalCoordinatesToCoordinateFrame(const Vector3D<valuetype>& vector) const { return Vector3D<valuetype>(u_ * vector, v_ * vector, w_ * vector); }
 
   Point3D<valuetype> p_;
   Vector3D<valuetype> u_, v_, w_;
