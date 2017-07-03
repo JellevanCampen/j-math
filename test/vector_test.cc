@@ -91,7 +91,7 @@ TEST(Vector2DTests, StringConversion) {
   std::stringstream ss;
   ss << vec;
   std::string s = ss.str();
-  EXPECT_EQ(s.compare("v(2, 3)"), 0) << "String conversion returned incorrect string (expected \"v(7, 6)\"). String: \"" << vec << "\"";
+  EXPECT_EQ(s.compare("Vector2D(2, 3)"), 0) << "String conversion returned incorrect string (expected \"v(7, 6)\"). String: \"" << vec << "\"";
 }
 
 TEST(Vector2DTests, ScalarProduct) {
@@ -253,7 +253,7 @@ TEST(Vector3DTests, StringConversion) {
   std::stringstream ss;
   ss << vec;
   std::string s = ss.str();
-  EXPECT_STREQ(s.c_str(), "v(2, 3, 8)") << "String conversion returned incorrect string (expected \"v(2, 3, 8)\"). String: \"" << vec << "\"";
+  EXPECT_STREQ(s.c_str(), "Vector3D(2, 3, 8)") << "String conversion returned incorrect string (expected \"v(2, 3, 8)\"). String: \"" << vec << "\"";
 }
 
 TEST(Vector3DTests, ScalarProduct) {

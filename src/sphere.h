@@ -28,7 +28,7 @@ struct Sphere {
   Sphere operator- (const Vector3D<valuetype>& vector) const { return Sphere(c_ - vector, r_); }
   void operator+= (const Vector3D<valuetype>& vector) { c_ += vector; }
   void operator-= (const Vector3D<valuetype>& vector) { c_ -= vector; }
-  // TODO: operator(float s, float t)
+  Point3D<valuetype> operator()(valuetype theta, valuetype phi) const { return GetPoint(theta, phi); }
 
   // Cast to different valuetype
   template<typename other_valuetype> operator Sphere<other_valuetype>() const { return Sphere<other_valuetype>(other_valuetype(c_), other_valuetype(r_)); }

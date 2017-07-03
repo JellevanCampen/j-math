@@ -40,7 +40,7 @@ public:
   template<typename other_valuetype> operator Vector2D<other_valuetype>() const { return Vector2D<other_valuetype>(other_valuetype(x_), other_valuetype(y_)); }
 
   // String conversion
-  friend std::ostream& operator<<(std::ostream &os, const Vector2D& vector) { return os << "v(" << vector.x_ << ", " << vector.y_ << ")"; }
+  friend std::ostream& operator<<(std::ostream &os, const Vector2D& vector) { return os << "Vector2D(" << vector.x_ << ", " << vector.y_ << ")"; }
 
   // Vector-specific functions
   valuetype ScalarProduct(const Vector2D& other) const { return operator*(other); }
@@ -95,7 +95,7 @@ public:
   template<typename other_valuetype> operator Vector3D<other_valuetype>() const { return Vector3D<other_valuetype>(other_valuetype(x_), other_valuetype(y_), other_valuetype(z_)); }
 
   // String conversion
-  friend std::ostream& operator<<(std::ostream &os, const Vector3D& vector) { return os << "v(" << vector.x_ << ", " << vector.y_ << ", " << vector.z_ << ")"; }
+  friend std::ostream& operator<<(std::ostream &os, const Vector3D& vector) { return os << "Vector3D(" << vector.x_ << ", " << vector.y_ << ", " << vector.z_ << ")"; }
 
   // Vector-specific functions
   valuetype ScalarProduct(const Vector3D& other) const { return operator*(other); }
