@@ -9,10 +9,9 @@
 namespace j {
 namespace math {
 
-// A coordinate frame in three-dimensional space. Defined by an origin point (p) and three base vectors (u, v, w).  
+// A coordinate frame in three-dimensional space. Defined by an origin point (p) and three base vectors (u, v, w).
 template<typename valuetype>
 struct CoordinateFrame3D {
-public:
   // Constructors
   CoordinateFrame3D(const CoordinateFrame3D&) = default;
   CoordinateFrame3D(Point3D<valuetype> p, Vector3D<valuetype> u, Vector3D<valuetype> v, Vector3D<valuetype> w) : p_(p), u_(u), v_(v), w_(w) { }
@@ -40,21 +39,21 @@ public:
 
   // Operators
   CoordinateFrame3D& operator=(const CoordinateFrame3D& other) = default;
-  inline bool operator== (const CoordinateFrame3D& other) const { return (p_ == other.p_ && u_ == other.u_ && v_ == other.v_ && w_ == other.w_); }
-  inline bool operator!= (const CoordinateFrame3D& other) const { return (p_ != other.p_ || u_ != other.u_ || v_ != other.v_ || w_ != other.w_); }
+  bool operator== (const CoordinateFrame3D& other) const { return (p_ == other.p_ && u_ == other.u_ && v_ == other.v_ && w_ == other.w_); }
+  bool operator!= (const CoordinateFrame3D& other) const { return (p_ != other.p_ || u_ != other.u_ || v_ != other.v_ || w_ != other.w_); }
 
   // Cast to different valuetype
   template<typename other_valuetype> operator CoordinateFrame3D<other_valuetype>() const { return CoordinateFrame3D<other_valuetype>(other_valuetype(p_), other_valuetype(u_), other_valuetype(v_), other_valuetype(w_)); }
 
   // String conversion
-  friend std::ostream& operator<<(std::ostream &os, const CoordinateFrame3D& cf) { return os << "frame(" << cf.p_ << ", " << cf.u_ << ", " << cf.v_ << ", " << cf.w_ << ")"; }
+  friend std::ostream& operator<<(std::ostream &os, const CoordinateFrame3D& cf) { return os << "CoordinateFrame3D(p=" << cf.p_ << ", u=" << cf.u_ << ", v=" << cf.v_ << ", w=" << cf.w_ << ")"; }
 
   // Coordinate frame specific functions
-  inline bool IsOrthonormal() const { return (u_.IsNormalized() && v_.IsNormalized() && w_.IsNormalized() && u_.IsOrthogonal(v_) && v_.IsOrthogonal(w_) && w_.IsOrthogonal(u_)); }
-  inline bool IsRightHandedOrthonormal() const { return (IsOrthonormal() && u_.CrossProduct(v_) == w_); }
-  inline void Reorthonormalize() { CoordinateFrame3D cf = FromTwoVectors(p_, w_, v_); operator=(cf); }
-  inline Vector3D<valuetype> CoordinateFrameToCanonicalCoordinates(const Vector3D<valuetype>& vector) const { return (vector.x_ * u_) + (vector.y_ * v_) + (vector.z_ * w_); }
-  inline Vector3D<valuetype> CanonicalCoordinatesToCoordinateFrame(const Vector3D<valuetype>& vector) const { return Vector3D<valuetype>(u_ * vector, v_ * vector, w_ * vector); }
+  bool IsOrthonormal() const { return (u_.IsNormalized() && v_.IsNormalized() && w_.IsNormalized() && u_.IsOrthogonal(v_) && v_.IsOrthogonal(w_) && w_.IsOrthogonal(u_)); }
+  bool IsRightHandedOrthonormal() const { return (IsOrthonormal() && u_.CrossProduct(v_) == w_); }
+  void Reorthonormalize() { CoordinateFrame3D cf = FromTwoVectors(p_, w_, v_); operator=(cf); }
+  Vector3D<valuetype> CoordinateFrameToCanonicalCoordinates(const Vector3D<valuetype>& vector) const { return (vector.x_ * u_) + (vector.y_ * v_) + (vector.z_ * w_); }
+  Vector3D<valuetype> CanonicalCoordinatesToCoordinateFrame(const Vector3D<valuetype>& vector) const { return Vector3D<valuetype>(u_ * vector, v_ * vector, w_ * vector); }
 
   Point3D<valuetype> p_;
   Vector3D<valuetype> u_, v_, w_;

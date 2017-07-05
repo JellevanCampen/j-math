@@ -6,11 +6,16 @@ using namespace j::math;
 //
 // NumericComparisonTests
 //
-//TEST(NumericComparisonTests, Constructors) {
-//  vec2i vec_default;
-//  vec2i vec_xy(3, 5);
-//  vec2i vec_copy(vec_xy);
-//  EXPECT_EQ(vec_default, vec2i(0, 0)) << "Default constructor did not initialize to (0, 0). Values: " << vec_default;
-//  EXPECT_EQ(vec_xy, vec2i(3, 5)) << "Value-based constructor did not initialize to (3, 5). Values: " << vec_xy;
-//  EXPECT_EQ(vec_copy, vec2i(3, 5)) << "Copy constructor did not copy values (3, 5) correctly. Values: " << vec_copy;
-//}
+TEST(NumericComparisonTests, Constructors) {
+  float f1 = 0.12345678910f;
+  float f2 = 0.12345678910f;
+  float f3 = -0.12345678910f;
+  float f4 = 0.12345678765f;
+  float f5 = 0.12343210123f;
+  float f6 = -0.12343210123f;
+  EXPECT_TRUE(AreEqual(f1, f2)) << "Two identical floats were considered non-equal: " << f1 << " and " << f2;
+  EXPECT_FALSE(AreEqual(f1, f3)) << "Two opposite floats were considered equal: " << f1 << " and " << f3;
+  EXPECT_TRUE(AreEqual(f1, f4)) << "Two near-identical floats were considered non-equal: " << f1 << " and " << f4;
+  EXPECT_FALSE(AreEqual(f1, f5)) << "Two slightly different floats were considered equal: " << f1 << " and " << f5;
+  EXPECT_FALSE(AreEqual(f1, f6)) << "Two slightly different and opposite floats were considered equal: " << f1 << " and " << f6;
+}

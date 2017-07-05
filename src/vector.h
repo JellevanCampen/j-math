@@ -11,7 +11,6 @@ namespace math {
 // A two-dimensional vector. Represents a direction and magnitude in two-dimensional space.
 template<typename valuetype>
 struct Vector2D {
-public:
   // Constructors
   Vector2D(): x_(valuetype(0)), y_(valuetype(0)) { }
   Vector2D(const Vector2D&) = default;
@@ -66,7 +65,6 @@ using vec2d = Vector2D<double>;
 // A three-dimensional vector. Represents a direction and magnitude in three-dimensional space.
 template<typename valuetype>
 struct Vector3D {
-public:
   // Constructors
   Vector3D() : x_(valuetype(0)), y_(valuetype(0)), z_(valuetype(0)) { }
   Vector3D(const Vector3D&) = default;

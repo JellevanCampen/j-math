@@ -11,49 +11,49 @@ TEST(Vector2DTests, Constructors) {
   vec2i vec_default;
   vec2i vec_xy(3, 5);
   vec2i vec_copy(vec_xy);
-  EXPECT_EQ(vec_default, vec2i(0, 0)) << "Default constructor did not initialize to (0, 0). Values: " << vec_default;
-  EXPECT_EQ(vec_xy, vec2i(3, 5)) << "Value-based constructor did not initialize to (3, 5). Values: " << vec_xy;
-  EXPECT_EQ(vec_copy, vec2i(3, 5)) << "Copy constructor did not copy values (3, 5) correctly. Values: " << vec_copy;
+  EXPECT_EQ(vec_default, vec2i(0, 0)) << "Default constructor did not initialize correctly.";
+  EXPECT_EQ(vec_xy, vec2i(3, 5)) << "Value-based constructor did not initialize correctly.";
+  EXPECT_EQ(vec_copy, vec2i(3, 5)) << "Copy constructor did not copy values correctly.";
 }
 
 TEST(Vector2DTests, TemplateTypes) {
   vec2d vec_d(2.5, 3.5);
   vec2i vec_i(2.5, 3.5);
-  EXPECT_EQ(vec_d, vec2d(2.5, 3.5)) << "Vector of type double did not initialize to (2.5, 3.5) correctly. Values: " << vec_d;
-  EXPECT_EQ(vec_i, vec2i(2, 3)) << "Vector of type int did not round down values to (2, 3) correctly. Values: " << vec_i;
+  EXPECT_EQ(vec_d, vec2d(2.5, 3.5)) << "Vector of type double did not initialize correctly.";
+  EXPECT_EQ(vec_i, vec2i(2, 3)) << "Vector of type int did not truncate values correctly.";
 }
 
 TEST(Vector2DTests, TypeCasting) {
   vec2d vec_d(2.5, 3.5);
   vec2i vec_i = vec2i(vec_d);
-  EXPECT_EQ(vec_d, vec2d(2.5, 3.5)) << "Vector of type double did not initialize to (2.5, 3.5) correctly. Values: " << vec_d;
-  EXPECT_EQ(vec_i, vec2i(2, 3)) << "Vector of type double was not cast to int with values (2, 3) correctly. Values: " << vec_i;
+  EXPECT_EQ(vec_d, vec2d(2.5, 3.5)) << "Vector of type double did not initialize correctly.";
+  EXPECT_EQ(vec_i, vec2i(2, 3)) << "Vector of type double was not cast to int correctly.";
 }
 
 TEST(Vector2DTests, CopyAssignment) {
   vec2d vec_d1(2.5, 3.5);
   vec2d vec_d2 = vec_d1;
   vec_d1 = vec2d(4.5, 6.5);
-  EXPECT_EQ(vec_d1, vec2d(4.5, 6.5)) << "Vector values were not updated to (4.5, 6.5) correctly. Values: " << vec_d1;
-  EXPECT_EQ(vec_d2, vec2d(2.5, 3.5)) << "Original vector values were modified (expected (2.5, 3.5)), meaning a shallow copy was made instead of a deep copy. Values: " << vec_d2;
+  EXPECT_EQ(vec_d1, vec2d(4.5, 6.5)) << "Vector values were not updated correctly.";
+  EXPECT_EQ(vec_d2, vec2d(2.5, 3.5)) << "Original vector values were modified, meaning a shallow copy was made instead of a deep copy.";
 }
 
 TEST(Vector2DTests, ComparisonOperators) {
   vec2f vec_f1(2.5f, 3.5f);
   vec2f vec_f2(2.5f, 3.5f);
   vec2f vec_f3(4.5f, 6.5f);
-  EXPECT_EQ(vec_f1, vec_f2) << "Two equal vectors were identified as non-equal. Values: " << vec_f1 << ", " << vec_f2;
-  EXPECT_NE(vec_f2, vec_f3) << "Two non-equal vectors were identified as equal. Values: " << vec_f2 << ", " << vec_f3;
+  EXPECT_EQ(vec_f1, vec_f2) << "Two equal vectors were identified as non-equal.";
+  EXPECT_NE(vec_f2, vec_f3) << "Two non-equal vectors were identified as equal.";
 }
 
 TEST(Vector2DTests, SubscriptOperator) {
   vec2f vec_f1(2.5f, 3.5f);
-  EXPECT_EQ(vec_f1[0], 2.5f) << "Vector x value was not read correctly (expected: 2.5f). Value: " << vec_f1[0];
-  EXPECT_EQ(vec_f1[1], 3.5f) << "Vector y value was not read correctly (expected: 3.5f). Value: " << vec_f1[1];
+  EXPECT_EQ(vec_f1[0], 2.5f) << "Vector x value was not read correctly.";
+  EXPECT_EQ(vec_f1[1], 3.5f) << "Vector y value was not read correctly.";
   vec_f1[0] = 4.5f;
   vec_f1[1] = 6.5f;
-  EXPECT_EQ(vec_f1[0], 4.5f) << "Vector x value was not written correctly. Subscript operator possibly returned deep copy of x instead of reference to x (expected: 4.5f). Value: " << vec_f1[0];
-  EXPECT_EQ(vec_f1[1], 6.5f) << "Vector y value was not written correctly. Subscript operator possibly returned deep copy of y instead of reference to y (expected: 6.5f). Value: " << vec_f1[1];
+  EXPECT_EQ(vec_f1[0], 4.5f) << "Vector x value was not written correctly. Subscript operator possibly returned deep copy of x instead of reference to x.";
+  EXPECT_EQ(vec_f1[1], 6.5f) << "Vector y value was not written correctly. Subscript operator possibly returned deep copy of y instead of reference to y.";
 }
 
 TEST(Vector2DTests, MathematicalOperators) {
@@ -61,29 +61,29 @@ TEST(Vector2DTests, MathematicalOperators) {
   vec2i vec2(9, 6);
   vec2i plus_vec1 = +vec1;
   vec2i minus_vec1 = -vec1;
-  EXPECT_EQ(plus_vec1, vec2i(2, 3)) << "Unary plus operator returned incorrect result (expected (2, 3)). Values: " << plus_vec1;
-  EXPECT_EQ(minus_vec1, vec2i(-2, -3)) << "Unary minus operator returned incorrect result (expected (-2, -3)). Values: " << minus_vec1;
+  EXPECT_EQ(plus_vec1, vec2i(2, 3)) << "Unary plus operator returned incorrect result.";
+  EXPECT_EQ(minus_vec1, vec2i(-2, -3)) << "Unary minus operator returned incorrect result.";
   vec2i sum = vec1 + vec2;
   vec2i difference = vec2 - vec1;
-  EXPECT_EQ(sum, vec2i(11, 9)) << "Binary sum operator returned incorrect result (expected (11, 9)). Values: " << sum;
-  EXPECT_EQ(difference, vec2i(7, 3)) << "Binary difference operator returned incorrect result (expected (7, 3)). Values: " << difference;
+  EXPECT_EQ(sum, vec2i(11, 9)) << "Binary sum operator returned incorrect result.";
+  EXPECT_EQ(difference, vec2i(7, 3)) << "Binary difference operator returned incorrect result.";
   int s = 3;
   vec2i product = vec1 * s;
   vec2i division = vec2 / s;
-  EXPECT_EQ(product, vec2i(6, 9)) << "Binary multiplication operator returned incorrect result (expected (6, 9)). Values: " << product;
-  EXPECT_EQ(division, vec2i(3, 2)) << "Binary division operator returned incorrect result (expected (3, 2)). Values: " << division;
+  EXPECT_EQ(product, vec2i(6, 9)) << "Binary multiplication operator returned incorrect result.";
+  EXPECT_EQ(division, vec2i(3, 2)) << "Binary division operator returned incorrect result.";
 }
 
 TEST(Vector2DTests, CompoundAssignmentOperators) {
   vec2i vec(2, 3);
   vec += vec2i(5, 3);
-  EXPECT_EQ(vec, vec2i(7, 6)) << "Sum assignment operator returned incorrect result (expected (7, 6)). Values: " << vec;
+  EXPECT_EQ(vec, vec2i(7, 6)) << "Sum assignment operator returned incorrect result.";
   vec -= vec2i(4, 1);
-  EXPECT_EQ(vec, vec2i(3, 5)) << "Difference assignment operator returned incorrect result (expected (3, 5)). Values: " << vec;
+  EXPECT_EQ(vec, vec2i(3, 5)) << "Difference assignment operator returned incorrect result.";
   vec *= 2;
-  EXPECT_EQ(vec, vec2i(6, 10)) << "Multiplication assignment operator returned incorrect result (expected (6, 10)). Values: " << vec;
+  EXPECT_EQ(vec, vec2i(6, 10)) << "Multiplication assignment operator returned incorrect result.";
   vec /= 2;
-  EXPECT_EQ(vec, vec2i(3, 5)) << "Division assignment operator returned incorrect result (expected (3, 5)). Values: " << vec;
+  EXPECT_EQ(vec, vec2i(3, 5)) << "Division assignment operator returned incorrect result.";
 }
 
 TEST(Vector2DTests, StringConversion) {
@@ -91,20 +91,20 @@ TEST(Vector2DTests, StringConversion) {
   std::stringstream ss;
   ss << vec;
   std::string s = ss.str();
-  EXPECT_EQ(s.compare("Vector2D(2, 3)"), 0) << "String conversion returned incorrect string (expected \"v(7, 6)\"). String: \"" << vec << "\"";
+  EXPECT_STREQ(s.c_str(), "Vector2D(2, 3)") << "String conversion returned incorrect string.";
 }
 
 TEST(Vector2DTests, ScalarProduct) {
   vec2i vec1(2, 3);
   vec2i vec2(4, 6);
-  EXPECT_EQ(vec1.ScalarProduct(vec2), 2*4 + 3*6) << "Scalar product is incorrect (expected (26)). Value: " << vec1.ScalarProduct(vec2);
-  EXPECT_EQ(vec1 * vec2, 2 * 4 + 3 * 6) << "Scalar product is incorrect (expected (26)). Value: " << vec1 * vec2;
+  EXPECT_EQ(vec1.ScalarProduct(vec2), 2*4 + 3*6) << "Scalar product is incorrect.";
+  EXPECT_EQ(vec1 * vec2, 2 * 4 + 3 * 6) << "Scalar product is incorrect.";
 }
 
 TEST(Vector2DTests, NormalVector) {
   vec2i vec(2, 3);
-  EXPECT_EQ(vec.Normal(), vec2i(-3, 2)) << "Normal vector is incorrect (expected (-3, 2)). Value: " << vec.Normal();
-  EXPECT_EQ(vec * vec.Normal(), 0) << "Scalar product of vector with its normal should be 0 due to orthogonality. Value: " << vec * vec.Normal();
+  EXPECT_EQ(vec.Normal(), vec2i(-3, 2)) << "Normal vector is incorrect.";
+  EXPECT_EQ(vec * vec.Normal(), 0) << "Scalar product of vector with its normal should be 0 due to orthogonality.";
 }
 
 TEST(Vector2DTests, OrthogonalityCollinearity) {
@@ -134,35 +134,35 @@ TEST(Vector2DTests, OrthogonalityCollinearity) {
 
 TEST(Vector2DTests, LengthCalculation) {
   vec2i vec_i(2, 3);
-  EXPECT_EQ(vec_i.LengthSquared(), 13) << "Squared length is incorrect (expected (13)). Value: " << vec_i.LengthSquared();
-  EXPECT_EQ(vec_i.Length(), 3) << "Length is incorrect (expected (3)). Value: " << vec_i.Length();
+  EXPECT_EQ(vec_i.LengthSquared(), 13) << "Squared length is incorrect.";
+  EXPECT_EQ(vec_i.Length(), 3) << "Length is incorrect.";
   vec2f vec_f(2.0, 3.0);
-  EXPECT_EQ(vec_f.LengthSquared(), 13.f) << "Squared length is incorrect (expected (13.f)). Value: " << vec_f.LengthSquared();;
-  EXPECT_EQ(vec_f.Length(), 3.605551275f) << "Length is incorrect (expected (3.605551275f)). Value: " << vec_f.Length();
+  EXPECT_EQ(vec_f.LengthSquared(), 13.f) << "Squared length is incorrect.";
+  EXPECT_EQ(vec_f.Length(), 3.605551275f) << "Length is incorrect.";
 }
 
 TEST(Vector2DTests, Normalization) {
   vec2f vec(2.f, 3.f);
   vec2f vec_n = vec.Normalize();
   vec2f vec_n_neg = (-vec).Normalize();
-  EXPECT_EQ(vec_n, vec2f(0.5547001962f, 0.83205029434f)) << "Normalized vector is incorrect (expected (0.5547001962f, 0.83205029434f)). Value: " << vec_n;
-  EXPECT_EQ(vec_n.Length(), 1.f) << "Length of a normalized vector should be 1. Value: " << vec_n.Length();
-  EXPECT_EQ(vec_n_neg, vec2f(-0.5547001962f, -0.83205029434f)) << "Normalized vector is incorrect (expected (-0.5547001962f, -0.83205029434f)). Possible error with negative component values. Value: " << vec_n_neg;
-  EXPECT_EQ(vec_n_neg.Length(), 1.f) << "Length of a normalized vector should be 1. Possible error with negative component values. Value: " << vec_n_neg.Length();
+  EXPECT_EQ(vec_n, vec2f(0.5547001962f, 0.83205029434f)) << "Normalized vector is incorrect.";
+  EXPECT_EQ(vec_n.Length(), 1.f) << "Length of a normalized vector should be 1.";
+  EXPECT_EQ(vec_n_neg, vec2f(-0.5547001962f, -0.83205029434f)) << "Normalized vector is incorrect. Possible error with negative component values.";
+  EXPECT_EQ(vec_n_neg.Length(), 1.f) << "Length of a normalized vector should be 1. Possible error with negative component values.";
 }
 
 TEST(Vector2DTests, Projection) {
   vec2f vec(2.f, 3.f);
   vec2f vec_x(1.f, 0.f);
   vec2f vec_neg_y(0.f, -1.f);
-  EXPECT_EQ(vec.ProjectOnto(vec_x), vec2f(2.f, 0.f)) << "Vector projection onto x-axis is incorrect (expected (2.f, 0.f)). Value: " << vec.ProjectOnto(vec_x);
-  EXPECT_EQ(vec.ProjectOnto(vec_neg_y), vec2f(0.f, 3.f)) << "Vector projection onto negative y-axis is incorrect (expected (0.f, 3.f)). Possible error with negative components in projection vectors. Value: " << vec.ProjectOnto(vec_neg_y);
-  EXPECT_EQ(vec.ProjectOnto(vec_x * 2), vec2f(2.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect (expected (2.f, 0.f)). Possible error with non-unit projection vectors. Value: " << vec.ProjectOnto(vec_x * 2);
-  EXPECT_EQ(vec.ProjectOnto(vec), vec2f(2.f, 3.f)) << "Vector projection onto self should result in identity operation (expected (2.f, 3.f)). Value: " << vec.ProjectOnto(vec);
+  EXPECT_EQ(vec.ProjectOnto(vec_x), vec2f(2.f, 0.f)) << "Vector projection onto x-axis is incorrect.";
+  EXPECT_EQ(vec.ProjectOnto(vec_neg_y), vec2f(0.f, 3.f)) << "Vector projection onto negative y-axis is incorrect. Possible error with negative components in projection vectors.";
+  EXPECT_EQ(vec.ProjectOnto(vec_x * 2), vec2f(2.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect. Possible error with non-unit projection vectors. Value: ";
+  EXPECT_EQ(vec.ProjectOnto(vec), vec2f(2.f, 3.f)) << "Vector projection onto self should result in identity operation.";
 }
 
 
-
+// TODO: refactor the tests below so they dont return values (as the framework does this already)
 //
 // Vector3DTests
 //

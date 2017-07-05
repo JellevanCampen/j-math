@@ -11,7 +11,6 @@ namespace math {
 // A point in two-dimensional space. Represents a position.
 template<typename valuetype>
 struct Point2D {
-public:
   // Constructors
   Point2D() : x_(valuetype(0)), y_(valuetype(0)) { }
   Point2D(const Point2D&) = default;
@@ -48,9 +47,8 @@ typedef Point2D<double> Point2Dd, p2d;
 // A point in three-dimensional space. Represents a position.
 template<typename valuetype>
 struct Point3D {
-public:
     // Constructors
-  Point3D() : x_(valuetype(0)), y_(valuetype(0), z_(valuetype(0))) { }
+  Point3D() : x_(valuetype(0)), y_(valuetype(0)), z_(valuetype(0)) { }
   Point3D(const Point3D&) = default;
   Point3D(valuetype x, valuetype y, valuetype z) : x_(x), y_(y), z_(z) { }
   ~Point3D() = default;
@@ -63,7 +61,10 @@ public:
   valuetype& operator[](const int& i) { switch (i) { case 0: return x_; case 1: return y_; case 2: return z_; default: return x_; } }
   Point3D operator+ (const Vector3D<valuetype>& vector) const { return Point3D(x_ + vector.x_, y_ + vector.y_, z_ + vector.z_); }
   Point3D operator- (const Vector3D<valuetype>& vector) const { return Point3D(x_ - vector.x_, y_ - vector.y_, z_ - vector.z_); }
-  Vector3D<valuetype> operator- (const Point3D<valuetype>& other) const { return Vector3D<valuetype>(other.x_ - x_, other.y_ - y_, other.z_ - z_); }
+  Vector3D<valuetype> operator- (const Point3D<valuetype>& other) const {
+    Vector3D<valuetype> temp(other.x_ - x_, other.y_ - y_, other.z_ - z_);
+    return Vector3D<valuetype>(other.x_ - x_, other.y_ - y_, other.z_ - z_);
+  }
   void operator+= (const Vector3D<valuetype>& vector) { x_ += vector.x_; y_ += vector.y_; z_ += vector.z_; }
   void operator-= (const Vector3D<valuetype>& vector) { x_ -= vector.x_; y_ -= vector.y_; z_ -= vector.z_; }
 
