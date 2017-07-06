@@ -16,6 +16,13 @@ TEST(Vector2DTests, Constructors) {
   EXPECT_EQ(vec_copy, vec2i(3, 5)) << "Copy constructor did not copy values correctly.";
 }
 
+TEST(Vector2DTests, UnitVectors) {
+  vec2i x_n = vec2i::Xn();
+  vec2i y_n = vec2i::Yn();
+  EXPECT_EQ(x_n, vec2i(1, 0)) << "Unit X vector is incorrect.";
+  EXPECT_EQ(y_n, vec2i(0, 1)) << "Unit Y vector is incorrect.";
+}
+
 TEST(Vector2DTests, TemplateTypes) {
   vec2d vec_d(2.5, 3.5);
   vec2i vec_i(2.5, 3.5);
@@ -173,6 +180,15 @@ TEST(Vector3DTests, Constructors) {
   EXPECT_EQ(vec_default, vec3i(0, 0, 0)) << "Default constructor did not initialize correctly.";
   EXPECT_EQ(vec_xyz, vec3i(3, 5, 8)) << "Value-based constructor did not initialize correctly.";
   EXPECT_EQ(vec_copy, vec3i(3, 5, 8)) << "Copy constructor did not copy values correctly.";
+}
+
+TEST(Vector3DTests, UnitVectors) {
+  vec3i x_n = vec3i::Xn();
+  vec3i y_n = vec3i::Yn();
+  vec3i z_n = vec3i::Zn();
+  EXPECT_EQ(x_n, vec3i(1, 0, 0)) << "Unit X vector is incorrect.";
+  EXPECT_EQ(y_n, vec3i(0, 1, 0)) << "Unit Y vector is incorrect.";
+  EXPECT_EQ(z_n, vec3i(0, 0, 1)) << "Unit Z vector is incorrect.";
 }
 
 TEST(Vector3DTests, TemplateTypes) {

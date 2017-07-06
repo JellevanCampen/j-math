@@ -16,6 +16,8 @@ struct Vector2D {
   Vector2D(const Vector2D&) = default;
   Vector2D(valuetype x, valuetype y) : x_(x), y_(y) { }
   ~Vector2D() = default;
+  static Vector2D Xn() { return Vector2D<valuetype>(1, 0); }
+  static Vector2D Yn() { return Vector2D<valuetype>(0, 1); }
 
   // Operators
   Vector2D& operator=(const Vector2D&) = default;
@@ -70,6 +72,9 @@ struct Vector3D {
   Vector3D(const Vector3D&) = default;
   Vector3D(valuetype x, valuetype y, valuetype z) : x_(x), y_(y), z_(z) { }
   ~Vector3D() = default;
+  static Vector3D Xn() { return Vector3D<valuetype>(1, 0, 0); }
+  static Vector3D Yn() { return Vector3D<valuetype>(0, 1, 0); }
+  static Vector3D Zn() { return Vector3D<valuetype>(0, 0, 1); }
 
   // Operators
   Vector3D& operator=(const Vector3D&) = default;
