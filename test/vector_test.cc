@@ -162,7 +162,7 @@ TEST(Vector2DTests, Projection) {
 }
 
 
-// TODO: refactor the tests below so they dont return values (as the framework does this already)
+
 //
 // Vector3DTests
 //
@@ -170,52 +170,52 @@ TEST(Vector3DTests, Constructors) {
   vec3i vec_default;
   vec3i vec_xyz(3, 5, 8);
   vec3i vec_copy(vec_xyz);
-  EXPECT_EQ(vec_default, vec3i(0, 0, 0)) << "Default constructor did not initialize to (0, 0, 0). Values: " << vec_default;
-  EXPECT_EQ(vec_xyz, vec3i(3, 5, 8)) << "Value-based constructor did not initialize to (3, 5, 8). Values: " << vec_xyz;
-  EXPECT_EQ(vec_copy, vec3i(3, 5, 8)) << "Copy constructor did not copy values (3, 5, 8) correctly. Values: " << vec_copy;
+  EXPECT_EQ(vec_default, vec3i(0, 0, 0)) << "Default constructor did not initialize correctly.";
+  EXPECT_EQ(vec_xyz, vec3i(3, 5, 8)) << "Value-based constructor did not initialize correctly.";
+  EXPECT_EQ(vec_copy, vec3i(3, 5, 8)) << "Copy constructor did not copy values correctly.";
 }
 
 TEST(Vector3DTests, TemplateTypes) {
   vec3d vec_d(2.5, 3.5, 8.5);
   vec3i vec_i(2.5, 3.5, 8.5);
-  EXPECT_EQ(vec_d, vec3d(2.5, 3.5, 8.5)) << "Vector of type double did not initialize to (2.5, 3.5, 8.5) correctly. Values: " << vec_d;
-  EXPECT_EQ(vec_i, vec3i(2, 3, 8)) << "Vector of type int did not round down values to (2, 3, 8) correctly. Values: " << vec_i;
+  EXPECT_EQ(vec_d, vec3d(2.5, 3.5, 8.5)) << "Vector of type double did not initialize correctly.";
+  EXPECT_EQ(vec_i, vec3i(2, 3, 8)) << "Vector of type int did not truncate values correctly.";
 }
 
 TEST(Vector3DTests, TypeCasting) {
   vec3d vec_d(2.5, 3.5, 8.5);
   vec3i vec_i = vec3i(vec_d);
-  EXPECT_EQ(vec_d, vec3d(2.5, 3.5, 8.5)) << "Vector of type double did not initialize to (2.5, 3.5, 8.5) correctly. Values: " << vec_d;
-  EXPECT_EQ(vec_i, vec3i(2, 3, 8)) << "Vector of type double was not cast to int with values (2, 3) correctly. Values: " << vec_i;
+  EXPECT_EQ(vec_d, vec3d(2.5, 3.5, 8.5)) << "Vector of type double did not initialize correctly.";
+  EXPECT_EQ(vec_i, vec3i(2, 3, 8)) << "Vector of type double was not cast to int correctly.";
 }
 
 TEST(Vector3DTests, CopyAssignment) {
   vec3d vec_d1(2.5, 3.5, 8.5);
   vec3d vec_d2 = vec_d1;
   vec_d1 = vec3d(4.5, 6.5, 7.5);
-  EXPECT_EQ(vec_d1, vec3d(4.5, 6.5, 7.5)) << "Vector values were not updated to (4.5, 6.5, 7.5) correctly. Values: " << vec_d1;
-  EXPECT_EQ(vec_d2, vec3d(2.5, 3.5, 8.5)) << "Original vector values were modified (expected (2.5, 3.5, 8.5)), meaning a shallow copy was made instead of a deep copy. Values: " << vec_d2;
+  EXPECT_EQ(vec_d1, vec3d(4.5, 6.5, 7.5)) << "Vector values were not updated correctly.";
+  EXPECT_EQ(vec_d2, vec3d(2.5, 3.5, 8.5)) << "Original vector values were modified, meaning a shallow copy was made instead of a deep copy.";
 }
 
 TEST(Vector3DTests, ComparisonOperators) {
   vec3f vec_f1(2.5f, 3.5f, 8.5f);
   vec3f vec_f2(2.5f, 3.5f, 8.5f);
   vec3f vec_f3(4.5f, 6.5f, 7.5f);
-  EXPECT_EQ(vec_f1, vec_f2) << "Two equal vectors were identified as non-equal. Values: " << vec_f1 << ", " << vec_f2;
-  EXPECT_NE(vec_f2, vec_f3) << "Two non-equal vectors were identified as equal. Values: " << vec_f2 << ", " << vec_f3;
+  EXPECT_EQ(vec_f1, vec_f2) << "Two equal vectors were identified as non-equal.";
+  EXPECT_NE(vec_f2, vec_f3) << "Two non-equal vectors were identified as equal.";
 }
 
 TEST(Vector3DTests, SubscriptOperator) {
   vec3f vec_f1(2.5f, 3.5f, 8.5f);
-  EXPECT_EQ(vec_f1[0], 2.5f) << "Vector x value was not read correctly (expected: 2.5f). Value: " << vec_f1[0];
-  EXPECT_EQ(vec_f1[1], 3.5f) << "Vector y value was not read correctly (expected: 3.5f). Value: " << vec_f1[1];
-  EXPECT_EQ(vec_f1[2], 8.5f) << "Vector z value was not read correctly (expected: 8.5f). Value: " << vec_f1[2];
+  EXPECT_EQ(vec_f1[0], 2.5f) << "Vector x value was not read correctly.";
+  EXPECT_EQ(vec_f1[1], 3.5f) << "Vector y value was not read correctly.";
+  EXPECT_EQ(vec_f1[2], 8.5f) << "Vector z value was not read correctly.";
   vec_f1[0] = 4.5f;
   vec_f1[1] = 6.5f;
   vec_f1[2] = 7.5f;
-  EXPECT_EQ(vec_f1[0], 4.5f) << "Vector x value was not written correctly. Subscript operator possibly returned deep copy of x instead of reference to x (expected: 4.5f). Value: " << vec_f1[0];
-  EXPECT_EQ(vec_f1[1], 6.5f) << "Vector y value was not written correctly. Subscript operator possibly returned deep copy of y instead of reference to y (expected: 6.5f). Value: " << vec_f1[1];
-  EXPECT_EQ(vec_f1[2], 7.5f) << "Vector z value was not written correctly. Subscript operator possibly returned deep copy of z instead of reference to z (expected: 7.5f). Value: " << vec_f1[2];
+  EXPECT_EQ(vec_f1[0], 4.5f) << "Vector x value was not written correctly. Subscript operator possibly returned deep copy of x instead of reference to x.";
+  EXPECT_EQ(vec_f1[1], 6.5f) << "Vector y value was not written correctly. Subscript operator possibly returned deep copy of y instead of reference to y.";
+  EXPECT_EQ(vec_f1[2], 7.5f) << "Vector z value was not written correctly. Subscript operator possibly returned deep copy of z instead of reference to z.";
 }
 
 TEST(Vector3DTests, MathematicalOperators) {
@@ -223,29 +223,29 @@ TEST(Vector3DTests, MathematicalOperators) {
   vec3i vec2(9, 6, 5);
   vec3i plus_vec1 = +vec1;
   vec3i minus_vec1 = -vec1;
-  EXPECT_EQ(plus_vec1, vec3i(2, 3, 8)) << "Unary plus operator returned incorrect result (expected (2, 3, 8)). Values: " << plus_vec1;
-  EXPECT_EQ(minus_vec1, vec3i(-2, -3, -8)) << "Unary minus operator returned incorrect result (expected (-2, -3, -8)). Values: " << minus_vec1;
+  EXPECT_EQ(plus_vec1, vec3i(2, 3, 8)) << "Unary plus operator returned incorrect result.";
+  EXPECT_EQ(minus_vec1, vec3i(-2, -3, -8)) << "Unary minus operator returned incorrect result.";
   vec3i sum = vec1 + vec2;
   vec3i difference = vec2 - vec1;
-  EXPECT_EQ(sum, vec3i(11, 9, 13)) << "Binary sum operator returned incorrect result (expected (11, 9, 13)). Values: " << sum;
-  EXPECT_EQ(difference, vec3i(7, 3, -3)) << "Binary difference operator returned incorrect result (expected (7, 3, -3)). Values: " << difference;
+  EXPECT_EQ(sum, vec3i(11, 9, 13)) << "Binary sum operator returned incorrect result.";
+  EXPECT_EQ(difference, vec3i(7, 3, -3)) << "Binary difference operator returned incorrect result.";
   int s = 3;
   vec3i product = vec1 * s;
   vec3i division = vec2 / s;
-  EXPECT_EQ(product, vec3i(6, 9, 24)) << "Binary multiplication operator returned incorrect result (expected (6, 9, 24)). Values: " << product;
-  EXPECT_EQ(division, vec3i(3, 2, 1)) << "Binary division operator returned incorrect result (expected (3, 2, 1)). Values: " << division;
+  EXPECT_EQ(product, vec3i(6, 9, 24)) << "Binary multiplication operator returned incorrect result.";
+  EXPECT_EQ(division, vec3i(3, 2, 1)) << "Binary division operator returned incorrect result.";
 }
 
 TEST(Vector3DTests, CompoundAssignmentOperators) {
   vec3i vec(2, 3, 8);
   vec += vec3i(5, 3, 1);
-  EXPECT_EQ(vec, vec3i(7, 6, 9)) << "Sum assignment operator returned incorrect result (expected (7, 6, 9)). Values: " << vec;
+  EXPECT_EQ(vec, vec3i(7, 6, 9)) << "Sum assignment operator returned incorrect result.";
   vec -= vec3i(4, 1, 5);
-  EXPECT_EQ(vec, vec3i(3, 5, 4)) << "Difference assignment operator returned incorrect result (expected (3, 5, 4)). Values: " << vec;
+  EXPECT_EQ(vec, vec3i(3, 5, 4)) << "Difference assignment operator returned incorrect result.";
   vec *= 2;
-  EXPECT_EQ(vec, vec3i(6, 10, 8)) << "Multiplication assignment operator returned incorrect result (expected (6, 10, 8)). Values: " << vec;
+  EXPECT_EQ(vec, vec3i(6, 10, 8)) << "Multiplication assignment operator returned incorrect result.";
   vec /= 2;
-  EXPECT_EQ(vec, vec3i(3, 5, 4)) << "Division assignment operator returned incorrect result (expected (3, 5, 4)). Values: " << vec;
+  EXPECT_EQ(vec, vec3i(3, 5, 4)) << "Division assignment operator returned incorrect result.";
 }
 
 TEST(Vector3DTests, StringConversion) {
@@ -253,23 +253,23 @@ TEST(Vector3DTests, StringConversion) {
   std::stringstream ss;
   ss << vec;
   std::string s = ss.str();
-  EXPECT_STREQ(s.c_str(), "Vector3D(2, 3, 8)") << "String conversion returned incorrect string (expected \"v(2, 3, 8)\"). String: \"" << vec << "\"";
+  EXPECT_STREQ(s.c_str(), "Vector3D(2, 3, 8)") << "String conversion returned incorrect string.";
 }
 
 TEST(Vector3DTests, ScalarProduct) {
   vec3i vec1(2, 3, 8);
   vec3i vec2(4, 6, 7);
-  EXPECT_EQ(vec1.ScalarProduct(vec2), 2 * 4 + 3 * 6 + 8 * 7) << "Scalar product is incorrect (expected (82)). Value: " << vec1.ScalarProduct(vec2);
-  EXPECT_EQ(vec1 * vec2, 2 * 4 + 3 * 6 + 8 * 7) << "Scalar product is incorrect (expected (82)). Value: " << vec1 * vec2;
+  EXPECT_EQ(vec1.ScalarProduct(vec2), 2 * 4 + 3 * 6 + 8 * 7) << "Scalar product is incorrect.";
+  EXPECT_EQ(vec1 * vec2, 2 * 4 + 3 * 6 + 8 * 7) << "Scalar product is incorrect.";
 }
 
 TEST(Vector3DTests, CrossProduct) {
   vec3i vec1(2, 3, 8);
   vec3i vec2(4, 6, 7);
   vec3i vec_cp = vec1.CrossProduct(vec2);
-  EXPECT_EQ(vec_cp, vec3i(-27, 18, 0)) << "Cross product is incorrect (expected (-27, 18, 0)). Value: " << vec_cp;
-  EXPECT_EQ(vec1 * vec_cp, 0) << "A cross product is orthogonal to its forming vectors. The scalar product should thus be 0. Value: " << vec1 * vec_cp;
-  EXPECT_EQ(vec2 * vec_cp, 0) << "A cross product is orthogonal to its forming vectors. The scalar product should thus be 0. Value: " << vec2 * vec_cp;
+  EXPECT_EQ(vec_cp, vec3i(-27, 18, 0)) << "Cross product is incorrect.";
+  EXPECT_EQ(vec1 * vec_cp, 0) << "A cross product is orthogonal to its forming vectors. The scalar product should thus be 0.";
+  EXPECT_EQ(vec2 * vec_cp, 0) << "A cross product is orthogonal to its forming vectors. The scalar product should thus be 0.";
 }
 
 TEST(Vector3DTests, OrthogonalityCollinearity) {
@@ -299,29 +299,29 @@ TEST(Vector3DTests, OrthogonalityCollinearity) {
 
 TEST(Vector3DTests, LengthCalculation) {
   vec3i vec_i(2, 3, 8);
-  EXPECT_EQ(vec_i.LengthSquared(), 77) << "Squared length is incorrect (expected (77)). Value: " << vec_i.LengthSquared();
-  EXPECT_EQ(vec_i.Length(), 8) << "Length is incorrect (expected (8)). Value: " << vec_i.Length();
+  EXPECT_EQ(vec_i.LengthSquared(), 77) << "Squared length is incorrect.";
+  EXPECT_EQ(vec_i.Length(), 8) << "Length is incorrect.";
   vec3f vec_f(2., 3.f, 8.f);
-  EXPECT_EQ(vec_f.LengthSquared(), 77.f) << "Squared length is incorrect (expected (77.f)). Value: " << vec_f.LengthSquared();;
-  EXPECT_EQ(vec_f.Length(), 8.77496438739f) << "Length is incorrect (expected (8.77496438739f)). Value: " << vec_f.Length();
+  EXPECT_EQ(vec_f.LengthSquared(), 77.f) << "Squared length is incorrect.";
+  EXPECT_EQ(vec_f.Length(), 8.77496438739f) << "Length is incorrect.";
 }
 
 TEST(Vector3DTests, Normalization) {
   vec3f vec(2.f, 3.f, 8.f);
   vec3f vec_n = vec.Normalize();
   vec3f vec_n_neg = (-vec).Normalize();
-  EXPECT_EQ(vec_n, vec3f(0.2279211529f, 0.34188172938f, 0.91168461168f)) << "Normalized vector is incorrect (expected (0.2279211529f, 0.34188172938f, 0.91168461168f)). Value: " << vec_n;
-  EXPECT_EQ(vec_n.Length(), 1.f) << "Length of a normalized vector should be 1. Value: " << vec_n.Length();
-  EXPECT_EQ(vec_n_neg, vec3f(-0.2279211529f, -0.34188172938f, -0.91168461168f)) << "Normalized vector is incorrect (expected (-0.2279211529f, -0.34188172938f, -0.91168461168f)). Possible error with negative component values. Value: " << vec_n_neg;
-  EXPECT_EQ(vec_n_neg.Length(), 1.f) << "Length of a normalized vector should be 1. Possible error with negative component values. Value: " << vec_n_neg.Length();
+  EXPECT_EQ(vec_n, vec3f(0.2279211529f, 0.34188172938f, 0.91168461168f)) << "Normalized vector is incorrect.";
+  EXPECT_EQ(vec_n.Length(), 1.f) << "Length of a normalized vector should be 1.";
+  EXPECT_EQ(vec_n_neg, vec3f(-0.2279211529f, -0.34188172938f, -0.91168461168f)) << "Normalized vector is incorrect.";
+  EXPECT_EQ(vec_n_neg.Length(), 1.f) << "Length of a normalized vector should be 1. Possible error with negative component values.";
 }
 
 TEST(Vector3DTests, Projection) {
   vec3f vec(2.f, 3.f, 8.f);
   vec3f vec_x(1.f, 0.f, 0.f);
   vec3f vec_neg_y(0.f, -1.f, 0.f);
-  EXPECT_EQ(vec.Project(vec_x), vec3f(2.f, 0.f, 0.f)) << "Vector projection onto x-axis is incorrect (expected (2.f, 0.f, 0.f)). Value: " << vec.Project(vec_x);
-  EXPECT_EQ(vec.Project(vec_neg_y), vec3f(0.f, 3.f, 0.f)) << "Vector projection onto negative y-axis is incorrect (expected (0.f, 3.f, 0.f)). Possible error with negative components in projection vectors. Value: " << vec.Project(vec_neg_y);
-  EXPECT_EQ(vec.Project(vec_x * 2), vec3f(2.f, 0.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect (expected (2.f, 0.f, 0.f)). Possible error with non-unit projection vectors. Value: " << vec.Project(vec_x * 2);
-  EXPECT_EQ(vec.Project(vec), vec3f(2.f, 3.f, 8.f)) << "Vector projection onto self should result in identity operation (expected (2.f, 3.f. 8.f)). Value: " << vec.Project(vec);
+  EXPECT_EQ(vec.Project(vec_x), vec3f(2.f, 0.f, 0.f)) << "Vector projection onto x-axis is incorrect.";
+  EXPECT_EQ(vec.Project(vec_neg_y), vec3f(0.f, 3.f, 0.f)) << "Vector projection onto negative y-axis is incorrect. Possible error with negative components in projection vectors.";
+  EXPECT_EQ(vec.Project(vec_x * 2), vec3f(2.f, 0.f, 0.f)) << "Vector projection onto non-normalized x-axis is incorrect. Possible error with non-unit projection vectors.";
+  EXPECT_EQ(vec.Project(vec), vec3f(2.f, 3.f, 8.f)) << "Vector projection onto self should result in identity operation.";
 }
