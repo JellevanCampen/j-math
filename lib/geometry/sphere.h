@@ -2,8 +2,8 @@
 #ifndef J_MATH_SPHERE_H_
 #define J_MATH_SPHERE_H_
 
-#include "numeric_comparison.h"
-#include "pi.h"
+#include "..\utility\numeric_comparison.h"
+#include "..\utility\pi.h"
 #include "point.h"
 #include <cmath>
 
@@ -45,7 +45,7 @@ struct Circle {
   valuetype SignedDistanceToSurface(const Point3D<valuetype>& p) const { return((p - c_).Length() - r_); }
   valuetype DistanceToSurface(const Point3D<valuetype>& p) const { valuetype d = SignedDistanceToSurface(p); return (d >= 0) ? d : -d; }
   Point2D<valuetype> EvaluateParametricSpecification(valuetype theta) const { return(c_ + Vector2D<valuetype>(std::cos(theta) * r_, std::sin(theta) * r_)); }
-  valuetype FindNearestParameterValue(const Point2D<valuetype>& p) const { Vector2D<valuetype> p_c = c_ - p; return valuetype(std::atan2(p_c.x_, p_c.y_)); }
+  // valuetype FindNearestParameterValue(const Point2D<valuetype>& p) const { Vector2D<valuetype> p_c = c_ - p; return valuetype(std::atan2(p_c.x_, p_c.y_)); }
   Point2D<valuetype> FindNearestPoint(const Point2D<valuetype>& p) const { return (c_ + (p - c_).Normalize() * r_); }
   Vector2D<valuetype> FindNearestNormal(const Point2D<valuetype>& p) const { return (p - c_).Normalize(); }
 

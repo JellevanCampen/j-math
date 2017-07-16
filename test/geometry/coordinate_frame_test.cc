@@ -1,12 +1,12 @@
 #include <gtest\gtest.h>
-#include "..\src\sphere.h"
+#include "..\..\lib\geometry\coordinate_frame.h"
 
 using namespace j::math;
 
 //
-// SphereTests
+// CoordinateFrame3DTests
 //
-//TEST(SphereTests, Constructors) {
+//TEST(CoordinateFrame3DTests, Constructors) {
 //  vec2i vec_default;
 //  vec2i vec_xy(3, 5);
 //  vec2i vec_copy(vec_xy);

@@ -1,5 +1,5 @@
 ﻿#include <gtest\gtest.h>
-#include "../src/plane.h"
+#include "..\..\lib\geometry\plane.h"
 
 using namespace j::math;
 

@@ -3,7 +3,7 @@
 #define J_MATH_VECTOR_H_
 
 #include <cmath>
-#include "numeric_comparison.h"
+#include "..\utility\numeric_comparison.h"
 
 namespace j {
 namespace math {

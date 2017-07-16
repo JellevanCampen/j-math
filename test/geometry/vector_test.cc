@@ -1,6 +1,6 @@
 #include <sstream>
 #include <gtest\gtest.h>
-#include "..\src\vector.h"
+#include "..\..\lib\geometry\vector.h"
 
 using namespace j::math;
 

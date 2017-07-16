@@ -1,5 +1,5 @@
 #include <gtest\gtest.h>
-#include "..\src\numeric_comparison.h"
+#include "..\..\lib\utility\\numeric_comparison.h"
 
 using namespace j::math;
 

@@ -2,7 +2,7 @@
 #ifndef J_MATH_POINT_H_
 #define J_MATH_POINT_H_
 
-#include "numeric_comparison.h"
+#include "..\utility\numeric_comparison.h"
 #include "vector.h"
 
 namespace j {

@@ -1,5 +1,5 @@
 #include <gtest\gtest.h>
-#include "..\src\point.h"
+#include "..\..\lib\geometry\point.h"
 
 using namespace j::math;
 
