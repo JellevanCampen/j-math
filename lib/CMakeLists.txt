@@ -30,3 +30,11 @@ list(APPEND SRC ${SRC_UTILITY})
 
 add_library( ${TARGET_NAME} ${SRC})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+
+################################################################
+# Installing
+################################################################
+
+install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/analysis" DESTINATION "install/include")
+install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/geometry" DESTINATION "install/include")
+install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/utility" DESTINATION "install/include")
